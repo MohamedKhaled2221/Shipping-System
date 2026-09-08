@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RootNamespace>ShippingSystem.Infrastructure</RootNamespace>
+		<AssemblyName>ShippingSystem.Infrastructure</AssemblyName>
+	</PropertyGroup>
+
+	<ItemGroup>
+
+		<!-- Entity Framework Core -->
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.0" />
+
+		<!-- SQL Server -->
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
+
+		<!-- Authentication / JWT -->
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.2.1" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.2.1" />
+
+		<!-- Redis -->
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.0" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+
+		<!-- ASP.NET Core shared framework -->
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+
+		<!-- Application layer -->
+		<ProjectReference Include="..\Application\Application.csproj" />
+
+	</ItemGroup>
+
+</Project>

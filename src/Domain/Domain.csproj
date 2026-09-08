@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ShippingSystem.Domain</RootNamespace>
+    <AssemblyName>ShippingSystem.Domain</AssemblyName>
+    <!-- The Domain layer must have ZERO dependencies on Infrastructure, EF Core, ASP.NET, etc. -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Marker interfaces only (INotification, IRequest, etc.) — no concrete Mediator
+         pipeline, no transitive dependency on Infrastructure/EF Core/ASP.NET. Lets
+         IDomainEvent implement MediatR.INotification so Infrastructure's
+         DomainEventDispatchInterceptor can actually IPublisher.Publish(domainEvent, ...)
+         without a runtime "TNotification : INotification" constraint failure. Version
+         pinned to match the concrete MediatR package Application/Infrastructure use. -->
+    <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
+  </ItemGroup>
+
+</Project>
