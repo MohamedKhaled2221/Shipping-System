@@ -1,0 +1,166 @@
+/* ==========================================================================
+   Design tokens — "Manifest" theme
+   A shipping console reads like a waybill: dense, tabular, unambiguous.
+   Navy for structure, amber for things in motion, mono for anything that is
+   literally an identifier a human will type into a tracking box.
+   ========================================================================== */
+:root {
+  --color-ink: #12233d;      /* primary navy — chrome, headings */
+  --color-ink-700: #1c3355;
+  --color-paper: #f7f5f0;    /* warm paper background */
+  --color-paper-raised: #ffffff;
+  --color-line: #dcd7c9;     /* hairline borders on paper */
+  --color-line-dark: #2c4468;
+  --color-amber: #e8871e;    /* in-transit / action accent */
+  --color-amber-dark: #b6660f;
+  --color-teal: #2c6e6b;     /* delivered / success */
+  --color-red: #b3402f;      /* failed / cancelled */
+  --color-muted: #6b7280;
+  --color-text: #1a1f26;
+
+  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --font-body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --shadow-card: 0 1px 2px rgba(18, 35, 61, 0.08), 0 1px 0 rgba(18, 35, 61, 0.04);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  margin: 0 0 0.5em;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: 1.7rem; font-weight: 700; }
+h2 { font-size: 1.3rem; font-weight: 600; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+
+a { color: var(--color-ink); }
+
+code, .mono, .tracking-number { font-family: var(--font-mono); letter-spacing: 0.01em; }
+
+button, .btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-ink);
+  background: var(--color-ink);
+  color: #fff;
+  padding: 0.55em 1.1em;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+
+  &:hover { background: var(--color-ink-700); }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  &.btn-outline {
+    background: transparent;
+    color: var(--color-ink);
+    &:hover { background: rgba(18, 35, 61, 0.06); }
+  }
+
+  &.btn-amber {
+    background: var(--color-amber);
+    border-color: var(--color-amber-dark);
+    &:hover { background: var(--color-amber-dark); }
+  }
+
+  &.btn-danger {
+    background: transparent;
+    border-color: var(--color-red);
+    color: var(--color-red);
+    &:hover { background: rgba(179, 64, 47, 0.08); }
+  }
+
+  &.btn-sm { padding: 0.35em 0.7em; font-size: 0.8rem; }
+}
+
+input, select, textarea {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 0.55em 0.7em;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  background: var(--color-paper-raised);
+  color: var(--color-text);
+  width: 100%;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 1px;
+  }
+}
+
+label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  margin-bottom: 0.3em;
+  text-transform: none;
+}
+
+.field { margin-bottom: 1rem; }
+
+.card {
+  background: var(--color-paper-raised);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 1.25rem;
+}
+
+.manifest-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+
+  th {
+    text-align: left;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-muted);
+    font-size: 0.75rem;
+    border-bottom: 2px solid var(--color-ink);
+    padding: 0.5em 0.6em;
+  }
+
+  td {
+    padding: 0.65em 0.6em;
+    border-bottom: 1px solid var(--color-line);
+    vertical-align: middle;
+  }
+
+  tbody tr:hover { background: rgba(18, 35, 61, 0.03); }
+}
+
+.error-text { color: var(--color-red); font-size: 0.82rem; margin-top: 0.3em; }
+.hint-text { color: var(--color-muted); font-size: 0.8rem; }
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--color-muted);
+}
+
+::selection { background: var(--color-amber); color: #fff; }
