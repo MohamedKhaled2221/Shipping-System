@@ -4,14 +4,12 @@ export const RECENT_SHIPMENTS_NAMESPACE = 'shipments';
 export const RECENT_AGENTS_NAMESPACE = 'delivery-agents';
 
 /**
- * ShipmentsController exposes GetById, agents/me, assign, status, cancel, and return — there
- * is no paged "list all shipments" endpoint for Admin/shipping-employee yet, and OrderDto
- * carries no ShipmentId to bridge from an order to its shipment either. Until the backend
- * adds something like GET /api/v1/shipments?status=&agentId=&page=, the admin console can
- * only open a shipment it already has the ID for — this remembers IDs seen in this browser
- * (e.g. from a webhook payload, a support ticket, or one you just assigned) so there's a
- * working list to click back into. Flag this gap per SRS section 8; it's a real backend
- * requirement gap, not just a frontend simplification.
+ * The admin dashboard now lists shipments via the paged GET /api/v1/shipments endpoint, but
+ * OrderDto still carries no ShipmentId to bridge from an order to its shipment, and a
+ * Customer/Agent may still want to jump straight back to something they only have the ID
+ * for (e.g. from a webhook payload or a support ticket). This remembers IDs seen in this
+ * browser to back that quick "open by ID" lookup — it's a convenience, not the primary
+ * listing mechanism anymore.
  */
 @Injectable({ providedIn: 'root' })
 export class RecentLookupService {

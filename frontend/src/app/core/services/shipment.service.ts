@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { ShipmentStatus } from '../models/enums';
+import { PagedResult } from '../models/product.models';
 import {
   AssignShipmentRequest,
   CancelShipmentRequest,
@@ -17,6 +19,19 @@ export class ShipmentService {
   private readonly recent = inject(RecentLookupService);
 
   constructor(private readonly http: HttpClient) {}
+
+  /** Admin only — FR-6.2 dashboard listing, paged and optionally filtered by status/agent. */
+  getShipments(
+    pageNumber = 1,
+    pageSize = 20,
+    status: ShipmentStatus | null = null,
+    agentId: string | null = null,
+  ): Observable<PagedResult<ShipmentDto>> {
+    let params = new HttpParams().set('pageNumber', pageNumber).set('pageSize', pageSize);
+    if (status !== null) params = params.set('status', status);
+    if (agentId) params = params.set('agentId', agentId);
+    return this.http.get<PagedResult<ShipmentDto>>(this.baseUrl, { params });
+  }
 
   getById(id: string): Observable<ShipmentDto> {
     return this.http
